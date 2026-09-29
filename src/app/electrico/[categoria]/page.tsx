@@ -1,0 +1,82 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { Button } from "@/components/Button";
+import { electricoCategories } from "@/data/electrico";
+
+type Props = PageProps<"/electrico/[categoria]">;
+
+export async function generateStaticParams() {
+  return electricoCategories.map((category) => ({
+    categoria: category.slug,
+  }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { categoria } = await params;
+  const category = electricoCategories.find((item) => item.slug === categoria);
+
+  if (!category) {
+    return { title: "TMF Eléctrico | TMF Mexico" };
+  }
+
+  return {
+    title: `${category.title} | TMF Eléctrico`,
+    description: `Productos TMF Eléctrico: ${category.title}.`,
+  };
+}
+
+export default async function ElectricoCategoryPage({ params }: Props) {
+  const { categoria } = await params;
+  const category = electricoCategories.find((item) => item.slug === categoria);
+
+  if (!category) {
+    notFound();
+  }
+
+  return (
+    <main className="flex flex-1 flex-col bg-white">
+      <section className="px-5 py-16 sm:px-8 lg:px-16 lg:py-24 xl:px-20">
+        <div className="mx-auto grid max-w-[90rem] items-center gap-12 lg:grid-cols-2">
+          <div>
+            <p className="subheading text-sm tracking-[0.14em] text-primary">
+              TMF Eléctrico
+            </p>
+            <h1 className="heading mt-4 text-4xl leading-[1.08] tracking-tight text-foreground sm:text-5xl">
+              {category.title}
+            </h1>
+            <p className="mt-6 max-w-lg text-base leading-7 text-foreground/70 sm:text-lg sm:leading-8">
+              {category.description} Consulta el catálogo para ver el
+              portafolio completo de esta categoría, o habla con nuestro equipo
+              para encontrar la solución adecuada a tu instalación.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button
+                href="/docs/catalogo-electrico.pdf"
+                icon="mdi:download"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Descargar catálogo
+              </Button>
+              <Button href="/electrico#contacto" variant="inverse">
+                Contáctanos
+              </Button>
+            </div>
+          </div>
+
+          <div className="relative aspect-square w-full bg-washed">
+            <Image
+              src={category.image}
+              alt={category.imageAlt}
+              fill
+              priority
+              className="object-contain p-8"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

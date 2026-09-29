@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #ecf5f9;
   --foreground: #171717;
+  --primary: #009de4;
+  --accent: #48bff6;
+  --washed: #ecf5f9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-washed: var(--washed);
+  --font-sans: var(--font-montserrat);
+  --animate-pin-drop: pin-drop 0.75s cubic-bezier(0.22, 1.15, 0.36, 1) both;
+  --animate-pin-pulse: pin-pulse 2.2s ease-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes pin-drop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -1.5rem) scale(0.4);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, 0.12rem) scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes pin-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.35);
+    opacity: 0.55;
+  }
+
+  75%,
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pin-drop,
+  .animate-pin-pulse {
+    animation: none;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 400;
+}
+
+@layer components {
+  .heading {
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 800;
+  }
+
+  .subheading {
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
 }
