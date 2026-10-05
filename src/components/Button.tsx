@@ -112,11 +112,12 @@ export function Button(props: ButtonAsLink | ButtonAsButton | ButtonAsSpan) {
     icon: _icon,
     className: _className,
     variant: _variant,
+    type = "button",
     ...buttonProps
-  } = props;
+  } = props as ButtonAsButton;
 
   return (
-    <button type="button" className={classes} {...buttonProps}>
+    <button type={type} className={classes} {...buttonProps}>
       <ButtonContent icon={icon} variant={variant}>
         {children}
       </ButtonContent>
