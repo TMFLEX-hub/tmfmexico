@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/Reveal";
 
 const logos = [
   {
@@ -52,18 +53,20 @@ export function Certifications() {
       className="bg-[#D6F2FF] px-5 py-12 sm:px-8 lg:px-16 lg:py-16 xl:px-20"
     >
       <ul className="mx-auto grid max-w-[90rem] grid-cols-2 items-center justify-items-center gap-x-8 gap-y-10 sm:grid-cols-4 lg:grid-cols-7 lg:gap-x-10">
-        {logos.map((logo) => (
-          <li
-            key={logo.src}
-            className="flex h-16 w-full items-center justify-center"
-          >
-            <Image
-              src={logo.src}
-              alt={logo.alt}
-              width={logo.width}
-              height={logo.height}
-              className="h-full w-auto max-w-full object-contain"
-            />
+        {logos.map((logo, index) => (
+          <li key={logo.src} className="w-full">
+            <Reveal
+              delay={index * 70}
+              className="flex h-16 w-full items-center justify-center"
+            >
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                className="h-full w-auto max-w-full object-contain transition-transform duration-500 hover:scale-110 motion-reduce:transition-none motion-reduce:hover:scale-100"
+              />
+            </Reveal>
           </li>
         ))}
       </ul>

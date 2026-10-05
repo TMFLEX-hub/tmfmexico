@@ -15,8 +15,45 @@
   --color-accent: var(--accent);
   --color-washed: var(--washed);
   --font-sans: var(--font-montserrat);
-  --animate-pin-drop: pin-drop 0.75s cubic-bezier(0.22, 1.15, 0.36, 1) both;
-  --animate-pin-pulse: pin-pulse 2.2s ease-out infinite;
+  --animate-pin-drop: pin-drop 1.05s cubic-bezier(0.22, 1.15, 0.36, 1) both;
+  --animate-pin-pulse: pin-pulse 2.6s ease-out infinite;
+  --animate-icon-float: icon-float 2.8s ease-in-out infinite;
+  --animate-icon-wiggle: icon-wiggle 2.4s ease-in-out infinite;
+  --animate-icon-pulse: icon-pulse-soft 2.2s ease-in-out infinite;
+  --animate-icon-stretch: icon-stretch 2.6s ease-in-out infinite;
+  --animate-icon-spin: icon-spin-slow 8s linear infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal-up {
+  transform: translate3d(0, 1.35rem, 0);
+}
+
+.reveal-left {
+  transform: translate3d(-1.5rem, 0, 0);
+}
+
+.reveal-right {
+  transform: translate3d(1.5rem, 0, 0);
+}
+
+.reveal-scale {
+  transform: scale(1.06);
+}
+
+.reveal-in {
+  transform: none;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 @keyframes pin-drop {
@@ -49,10 +86,80 @@
   }
 }
 
+@keyframes icon-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes icon-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes icon-pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.14);
+  }
+}
+
+@keyframes icon-stretch {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(1.18);
+  }
+}
+
+@keyframes icon-spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-pin-drop,
-  .animate-pin-pulse {
+  .animate-pin-pulse,
+  .animate-icon-float,
+  .animate-icon-wiggle,
+  .animate-icon-pulse,
+  .animate-icon-stretch,
+  .animate-icon-spin {
     animation: none;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 

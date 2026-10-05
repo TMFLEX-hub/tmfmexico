@@ -61,15 +61,32 @@ type SharedProps = {
 
 type ButtonAsLink = SharedProps & {
   href: string;
+  as?: never;
 } & Omit<ComponentProps<typeof Link>, "href" | "children" | "className">;
 
 type ButtonAsButton = SharedProps & {
   href?: undefined;
+  as?: never;
 } & Omit<ComponentProps<"button">, "children" | "className">;
 
-export function Button(props: ButtonAsLink | ButtonAsButton) {
+type ButtonAsSpan = SharedProps & {
+  href?: undefined;
+  as: "span";
+};
+
+export function Button(props: ButtonAsLink | ButtonAsButton | ButtonAsSpan) {
   const classes = `${buttonClasses} ${props.className ?? ""}`.trim();
   const { children, icon, variant } = props;
+
+  if (props.as === "span") {
+    return (
+      <span className={classes}>
+        <ButtonContent icon={icon} variant={variant}>
+          {children}
+        </ButtonContent>
+      </span>
+    );
+  }
 
   if ("href" in props && props.href) {
     const {

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { Icon } from "@/components/Icon";
+import { Reveal } from "@/components/Reveal";
 
 const values = [
   { icon: "mdi:medal-outline", label: "Calidad" },
@@ -82,7 +83,7 @@ export function About() {
           className="absolute inset-[-18%] will-change-transform"
         >
           <Image
-            src="/images/about.jpg"
+            src="/images/aboutr.jpg"
             alt="Instalación eléctrica con tubería flexible TMF"
             fill
             className="object-cover object-top-left"
@@ -94,34 +95,42 @@ export function About() {
       <div className="relative z-10 mx-auto flex max-w-[90rem] flex-col px-5 pt-4 pb-16 sm:px-8 lg:min-h-[46rem] lg:justify-end lg:px-16 lg:pt-96 xl:px-20">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:gap-10">
           <div className="max-w-lg text-white">
-            <p className="subheading text-sm tracking-[0.14em] text-white">
-              Sobre TMF
-            </p>
-            <h2 className="heading mt-4 text-3xl leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              Más de seis décadas de experiencia, ingeniería y manufactura.
-            </h2>
-            <p className="mt-5 text-base leading-7 text-white/85 sm:text-lg sm:leading-8">
-              Desde 1957, TMF diseña y fabrica en México soluciones de tubería
-              flexible para aplicaciones eléctricas e industriales. Nuestra
-              experiencia, capacidad de manufactura e ingeniería nos permite
-              desarrollar productos estandarizados y soluciones adaptadas a
-              requerimientos específicos.
-            </p>
+            <Reveal>
+              <p className="subheading text-sm tracking-[0.14em] text-white">
+                Sobre TMF
+              </p>
+            </Reveal>
+            <Reveal delay={180}>
+              <h2 className="heading mt-4 text-3xl leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+                Más de seis décadas de experiencia, ingeniería y manufactura.
+              </h2>
+            </Reveal>
+            <Reveal delay={360}>
+              <p className="mt-5 text-base leading-7 text-white/85 sm:text-lg sm:leading-8">
+                Desde 1957, TMF diseña y fabrica en México soluciones de tubería
+                flexible para aplicaciones eléctricas e industriales. Nuestra
+                experiencia, capacidad de manufactura e ingeniería nos permite
+                desarrollar productos estandarizados y soluciones adaptadas a
+                requerimientos específicos.
+              </p>
+            </Reveal>
           </div>
 
           <ul className="grid w-full grid-cols-2 gap-6 text-white sm:grid-cols-3 lg:min-w-0 lg:flex-1 lg:grid-cols-5 lg:gap-3">
-            {values.map((value) => (
-              <li
-                key={value.label}
-                className="flex min-w-0 flex-col items-center gap-3 text-center"
-              >
-                <Icon
-                  icon={value.icon}
-                  className="size-8 text-white [&_path]:fill-white"
-                />
-                <span className="heading text-[clamp(0.95rem,1.15vw,1.125rem)] text-white">
-                  {value.label}
-                </span>
+            {values.map((value, index) => (
+              <li key={value.label}>
+                <Reveal
+                  delay={480 + index * 110}
+                  className="flex min-w-0 flex-col items-center gap-3 text-center"
+                >
+                  <Icon
+                    icon={value.icon}
+                    className="size-8 text-white [&_path]:fill-white"
+                  />
+                  <span className="heading text-[clamp(0.95rem,1.15vw,1.125rem)] text-white">
+                    {value.label}
+                  </span>
+                </Reveal>
               </li>
             ))}
           </ul>

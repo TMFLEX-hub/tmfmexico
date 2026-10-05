@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
+import { Reveal } from "@/components/Reveal";
 
 const pins = [
   { name: "Nuevo León", left: "58.7%", top: "45.9%", delay: "0ms" },
@@ -66,59 +67,67 @@ export function Coverage({
     >
       <div className="mx-auto grid max-w-[90rem] items-center gap-12 lg:grid-cols-[minmax(0,28rem)_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[minmax(0,32rem)_minmax(0,1fr)]">
         <div>
-          <p className="subheading text-sm tracking-[0.14em] text-primary">
-            {eyebrow}
-          </p>
-          <h2 className="heading mt-4 text-3xl leading-[1.12] tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
-            {title}
-          </h2>
-          <p className="mt-5 max-w-md text-base leading-7 text-foreground/70 sm:text-lg sm:leading-8">
-            {description}
-          </p>
-          <div className="mt-10">
+          <Reveal>
+            <p className="subheading text-sm tracking-[0.14em] text-primary">
+              {eyebrow}
+            </p>
+          </Reveal>
+          <Reveal delay={180}>
+            <h2 className="heading mt-4 text-3xl leading-[1.12] tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
+              {title}
+            </h2>
+          </Reveal>
+          <Reveal delay={360}>
+            <p className="mt-5 max-w-md text-base leading-7 text-foreground/70 sm:text-lg sm:leading-8">
+              {description}
+            </p>
+          </Reveal>
+          <Reveal delay={540} className="mt-10">
             <Button href={ctaHref}>{ctaLabel}</Button>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="relative mx-auto aspect-795/591 w-full max-w-3xl lg:max-w-none">
-          <Image
-            src="/images/mapa.svg"
-            alt="Mapa de cobertura TMF en México"
-            fill
-            className="object-contain"
-          />
+        <Reveal delay={280} variant="scale" className="w-full">
+          <div className="relative mx-auto aspect-795/591 w-full max-w-3xl lg:max-w-none">
+            <Image
+              src="/images/mapa.svg"
+              alt="Mapa de cobertura TMF en México"
+              fill
+              className="object-contain"
+            />
 
-          <ul className="pointer-events-none absolute inset-0">
-            {pins.map((pin) => (
-              <li
-                key={pin.name}
-                className="absolute"
-                style={{ left: pin.left, top: pin.top }}
-              >
-                <span
-                  className={`absolute top-0 left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/50 ${
-                    active ? "animate-pin-pulse" : "opacity-0"
-                  }`}
-                  style={{ animationDelay: `calc(${pin.delay} + 700ms)` }}
-                  aria-hidden
-                />
-                <span
-                  className={`absolute bottom-0 left-1/2 ${
-                    active ? "animate-pin-drop" : "opacity-0"
-                  }`}
-                  style={{ animationDelay: pin.delay }}
+            <ul className="pointer-events-none absolute inset-0">
+              {pins.map((pin) => (
+                <li
+                  key={pin.name}
+                  className="absolute"
+                  style={{ left: pin.left, top: pin.top }}
                 >
-                  <Icon
-                    icon="mdi:map-marker"
-                    className="size-9 text-primary drop-shadow-sm sm:size-10"
+                  <span
+                    className={`absolute top-0 left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/50 ${
+                      active ? "animate-pin-pulse" : "opacity-0"
+                    }`}
+                    style={{ animationDelay: `calc(${pin.delay} + 900ms)` }}
                     aria-hidden
                   />
-                  <span className="sr-only">{pin.name}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  <span
+                    className={`absolute bottom-0 left-1/2 ${
+                      active ? "animate-pin-drop" : "opacity-0"
+                    }`}
+                    style={{ animationDelay: pin.delay }}
+                  >
+                    <Icon
+                      icon="mdi:map-marker"
+                      className="size-9 text-primary drop-shadow-sm sm:size-10"
+                      aria-hidden
+                    />
+                    <span className="sr-only">{pin.name}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -22,9 +22,9 @@ export default function ElectricoPage() {
         description="Desarrollamos y fabricamos soluciones completas de canalización eléctrica y soportería para instalaciones domésticas, comerciales e industrias, en presentaciones adaptadas a diversos canales de distribución. Nuestro portafolio integra tubería flexible, conduit, conectores y accesorios."
         ctaLabel="Conoce nuestros productos"
         ctaHref="#productos"
-        imageSrc="/images/electrico/hero.jpg"
-        imageAlt="Tubería conduit flexible metálica TMF"
-        imageFit="contain"
+        imageSrc="/images/electrico/hero-v3.jpg"
+        imageAlt="Instalación eléctrica con tubería flexible y cajas de conexión en un edificio comercial"
+        imageFit="cover"
         priority
       />
       <ProductCategories />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/Button";
+import { Reveal } from "@/components/Reveal";
 import { electricoCategories } from "@/data/electrico";
 
 type Props = PageProps<"/electrico/[categoria]">;
@@ -39,18 +40,24 @@ export default async function ElectricoCategoryPage({ params }: Props) {
       <section className="px-5 py-16 sm:px-8 lg:px-16 lg:py-24 xl:px-20">
         <div className="mx-auto grid max-w-[90rem] items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="subheading text-sm tracking-[0.14em] text-primary">
-              TMF Eléctrico
-            </p>
-            <h1 className="heading mt-4 text-4xl leading-[1.08] tracking-tight text-foreground sm:text-5xl">
-              {category.title}
-            </h1>
-            <p className="mt-6 max-w-lg text-base leading-7 text-foreground/70 sm:text-lg sm:leading-8">
-              {category.description} Consulta el catálogo para ver el
-              portafolio completo de esta categoría, o habla con nuestro equipo
-              para encontrar la solución adecuada a tu instalación.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <Reveal instant>
+              <p className="subheading text-sm tracking-[0.14em] text-primary">
+                TMF Eléctrico
+              </p>
+            </Reveal>
+            <Reveal instant delay={180}>
+              <h1 className="heading mt-4 text-4xl leading-[1.08] tracking-tight text-foreground sm:text-5xl">
+                {category.title}
+              </h1>
+            </Reveal>
+            <Reveal instant delay={360}>
+              <p className="mt-6 max-w-lg text-base leading-7 text-foreground/70 sm:text-lg sm:leading-8">
+                {category.description} Consulta el catálogo para ver el
+                portafolio completo de esta categoría, o habla con nuestro
+                equipo para encontrar la solución adecuada a tu instalación.
+              </p>
+            </Reveal>
+            <Reveal instant delay={540} className="mt-10 flex flex-wrap gap-4">
               <Button
                 href="/docs/catalogo-electrico.pdf"
                 icon="mdi:download"
@@ -62,10 +69,15 @@ export default async function ElectricoCategoryPage({ params }: Props) {
               <Button href="/electrico#contacto" variant="inverse">
                 Contáctanos
               </Button>
-            </div>
+            </Reveal>
           </div>
 
-          <div className="relative aspect-square w-full bg-washed">
+          <Reveal
+            instant
+            delay={220}
+            variant="scale"
+            className="relative aspect-square w-full bg-washed"
+          >
             <Image
               src={category.image}
               alt={category.imageAlt}
@@ -74,7 +86,7 @@ export default async function ElectricoCategoryPage({ params }: Props) {
               className="object-contain p-8"
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
     </main>
