@@ -1,5 +1,5 @@
-import { PageHeading } from "@/components/PageHeading";
+import { redirect } from "next/navigation";
 
 export default function ContactoPage() {
-  return <PageHeading title="Contacto" />;
+  redirect("/#contacto");
 }

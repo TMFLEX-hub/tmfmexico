@@ -1,5 +1,5 @@
-import { PageHeading } from "@/components/PageHeading";
+import { redirect } from "next/navigation";
 
 export default function SucursalesPage() {
-  return <PageHeading title="Sucursales" />;
+  redirect("/#cobertura");
 }

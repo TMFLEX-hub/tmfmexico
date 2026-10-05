@@ -48,6 +48,7 @@ export function KeyPoints() {
               >
                 <Icon
                   icon={reason.icon}
+                  aria-hidden
                   className={`size-8 ${iconMotion[reason.motion]}`}
                   style={{ animationDelay: `${index * 180}ms` }}
                 />

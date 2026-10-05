@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, MouseEvent, ReactNode } from "react";
 import { Icon } from "@/components/Icon";
+import { handleSectionLinkClick } from "@/lib/scrollToSection";
 
 const buttonClasses =
   "group relative inline-flex items-stretch overflow-hidden border-2 border-primary bg-white";
@@ -43,6 +46,7 @@ function ButtonContent({
       >
         <Icon
           icon={icon}
+          aria-hidden
           className={`size-5 transition-colors duration-300 ${
             inverse ? "text-primary group-hover:text-white" : "text-white"
           }`}
@@ -95,11 +99,17 @@ export function Button(props: ButtonAsLink | ButtonAsButton | ButtonAsSpan) {
       icon: _icon,
       className: _className,
       variant: _variant,
+      onClick,
       ...linkProps
     } = props;
 
+    const onLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
+      onClick?.(event);
+      handleSectionLinkClick(event, href);
+    };
+
     return (
-      <Link href={href} className={classes} {...linkProps}>
+      <Link href={href} className={classes} onClick={onLinkClick} {...linkProps}>
         <ButtonContent icon={icon} variant={variant}>
           {children}
         </ButtonContent>

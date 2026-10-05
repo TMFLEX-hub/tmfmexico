@@ -9,7 +9,7 @@ const solutions = [
     href: "/electrico",
     title: "TMF Eléctrico",
     image: "/images/electrico.png",
-    imageAlt: "Tubería flexible corrugada para instalaciones eléctricas",
+    imageAlt: "Tubería flexible corrugada TMF Eléctrico para instalaciones eléctricas",
     icon: "mdi:lightning-bolt",
     description:
       "Tubería flexible, conectores y accesorios para instalaciones eléctricas seguras, confiables y eficientes.",
@@ -19,11 +19,10 @@ const solutions = [
     href: "/industrial",
     title: "TMF Industrial",
     image: "/images/industrial.png",
-    imageAlt: "Mangueras metálicas flexibles y ensambles industriales",
+    imageAlt: "Mangueras metálicas flexibles y ensambles TMF Industrial",
     icon: "mdi:factory",
     description:
       "Mangueras metálicas flexibles, ensambles y soluciones especializadas para aplicaciones industriales de alta exigencia.",
-    cta: "Conoce TMF Industrial",
   },
 ];
 
@@ -59,45 +58,68 @@ export function Solutions() {
           className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[200vh] w-[200vw] -translate-x-1/2 bg-primary"
         />
 
-        {solutions.map((solution, index) => (
-          <Link
-            key={solution.href}
-            href={solution.href}
-            className="group relative z-10 flex h-full flex-col bg-white transition-shadow duration-700 hover:shadow-[0_24px_50px_-28px_rgba(0,157,228,0.55)]"
-          >
-            <Reveal delay={index * 160} className="relative aspect-2/1 w-full overflow-hidden bg-white">
-              <Image
-                src={solution.image}
-                alt={solution.imageAlt}
-                fill
-                className="object-cover p-6 transition-transform duration-1000 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                sizes="(min-width: 768px) 50vw, 100vw"
-              />
-            </Reveal>
-            <div className="flex flex-1 flex-col px-8 pt-2 pb-8">
-              <Reveal delay={80 + index * 160}>
-                <span className="flex size-11 items-center justify-center rounded-full bg-washed text-primary transition-transform duration-700 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100">
-                  <Icon icon={solution.icon} className="size-5" />
-                </span>
+        {solutions.map((solution, index) => {
+          const cardClassName =
+            "group relative z-10 flex h-full flex-col bg-white transition-shadow duration-700 hover:shadow-[0_24px_50px_-28px_rgba(0,157,228,0.55)]";
+          const content = (
+            <>
+              <Reveal
+                delay={index * 160}
+                className="relative aspect-2/1 w-full overflow-hidden bg-white"
+              >
+                <Image
+                  src={solution.image}
+                  alt={solution.imageAlt}
+                  fill
+                  className="object-cover p-6 transition-transform duration-1000 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
               </Reveal>
-              <Reveal delay={180 + index * 160}>
-                <h3 className="heading mt-5 text-2xl tracking-tight text-foreground uppercase">
-                  {solution.title}
-                </h3>
-              </Reveal>
-              <Reveal delay={320 + index * 160}>
-                <p className="mt-3 max-w-md text-base leading-7 text-foreground/70">
-                  {solution.description}
-                </p>
-              </Reveal>
-              <Reveal delay={460 + index * 160} className="mt-auto pt-8">
-                <Button as="span" variant="inverse">
-                  {solution.cta}
-                </Button>
-              </Reveal>
+              <div className="flex flex-1 flex-col px-8 pt-2 pb-8">
+                <Reveal delay={80 + index * 160}>
+                  <span className="flex size-11 items-center justify-center rounded-full bg-washed text-primary transition-transform duration-700 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+                    <Icon
+                      icon={solution.icon}
+                      aria-hidden
+                      className="size-5"
+                    />
+                  </span>
+                </Reveal>
+                <Reveal delay={180 + index * 160}>
+                  <h3 className="heading mt-5 text-2xl tracking-tight text-foreground uppercase">
+                    {solution.title}
+                  </h3>
+                </Reveal>
+                <Reveal delay={320 + index * 160}>
+                  <p className="mt-3 max-w-md text-base leading-7 text-foreground/70">
+                    {solution.description}
+                  </p>
+                </Reveal>
+                {solution.cta ? (
+                  <Reveal delay={460 + index * 160} className="mt-auto pt-8">
+                    <Button as="span" variant="inverse">
+                      {solution.cta}
+                    </Button>
+                  </Reveal>
+                ) : null}
+              </div>
+            </>
+          );
+
+          return solution.cta ? (
+            <Link
+              key={solution.href}
+              href={solution.href}
+              className={cardClassName}
+            >
+              {content}
+            </Link>
+          ) : (
+            <div key={solution.href} className={cardClassName}>
+              {content}
             </div>
-          </Link>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

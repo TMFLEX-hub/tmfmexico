@@ -1,5 +1,5 @@
-import { PageHeading } from "@/components/PageHeading";
+import { redirect } from "next/navigation";
 
 export default function ServicioAlClientePage() {
-  return <PageHeading title="Servicio al cliente" />;
+  redirect("/#servicio-al-cliente");
 }

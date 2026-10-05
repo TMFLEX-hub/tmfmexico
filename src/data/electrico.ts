@@ -3,36 +3,46 @@ export const electricoCategories = [
     slug: "tubos-flexibles",
     title: "Tubos flexibles",
     description: "Máxima resistencia y flexibilidad.",
+    seoDescription:
+      "Tubos flexibles TMF Eléctrico con máxima resistencia y flexibilidad para canalización eléctrica. Fabricados en México para instalaciones domésticas, comerciales e industriales.",
     image: "/images/electrico/tubos-v2.jpg",
-    imageAlt: "Tubería conduit flexible metálica TMF",
+    imageAlt: "Tubería conduit flexible metálica TMF Eléctrico para canalización eléctrica",
   },
   {
     slug: "conexiones",
     title: "Conexiones",
     description: "Seguridad y protección en cada unión.",
+    seoDescription:
+      "Conexiones TMF Eléctrico para unir tubería flexible con seguridad y protección. Conectores y uniones fabricados en México para canalización eléctrica.",
     image: "/images/electrico/conexiones-v2.jpg",
-    imageAlt: "Conectores y uniones para tubería flexible",
+    imageAlt: "Conectores y uniones TMF Eléctrico para tubería flexible",
   },
   {
     slug: "accesorios",
     title: "Accesorios",
     description: "Soluciones completas para cada proyecto.",
+    seoDescription:
+      "Accesorios TMF Eléctrico para completar cada instalación. Soluciones de canalización eléctrica fabricadas en México para cada tipo de proyecto.",
     image: "/images/electrico/accesorios-v2.jpg",
-    imageAlt: "Accesorios para canalización eléctrica",
+    imageAlt: "Accesorios TMF Eléctrico para canalización eléctrica",
   },
   {
     slug: "soportes-y-fijaciones",
     title: "Soportes y fijaciones",
     description: "Instalaciones firmes, seguras y duraderas.",
+    seoDescription:
+      "Soportes y fijaciones TMF Eléctrico para instalaciones firmes, seguras y duraderas. Abrazaderas y canal strut fabricados en México.",
     image: "/images/electrico/soportes-v2.jpg",
-    imageAlt: "Soportes, abrazaderas y canal strut",
+    imageAlt: "Soportes, abrazaderas y canal strut TMF Eléctrico",
   },
   {
     slug: "cajas-y-gabinetes",
     title: "Cajas y gabinetes",
     description: "Protección confiable para tus conexiones.",
+    seoDescription:
+      "Cajas y gabinetes TMF Eléctrico para proteger conexiones eléctricas. Soluciones confiables de canalización fabricadas en México.",
     image: "/images/electrico/cajas-v2.jpg",
-    imageAlt: "Cajas y gabinetes para instalaciones eléctricas",
+    imageAlt: "Cajas y gabinetes TMF Eléctrico para instalaciones eléctricas",
   },
 ] as const;
 

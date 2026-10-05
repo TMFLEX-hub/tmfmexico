@@ -32,9 +32,10 @@ export function Contact() {
 
           <Reveal delay={360}>
             <form className="mt-10 flex flex-col gap-5" onSubmit={onSubmit}>
-              <label className="text-sm text-foreground">
+              <label htmlFor="nombre" className="text-sm text-foreground">
                 Nombre completo
                 <input
+                  id="nombre"
                   type="text"
                   name="nombre"
                   autoComplete="name"
@@ -43,9 +44,10 @@ export function Contact() {
                 />
               </label>
 
-              <label className="text-sm text-foreground">
+              <label htmlFor="empresa" className="text-sm text-foreground">
                 Nombre empresa
                 <input
+                  id="empresa"
                   type="text"
                   name="empresa"
                   autoComplete="organization"
@@ -54,9 +56,10 @@ export function Contact() {
               </label>
 
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="text-sm text-foreground">
+                <label htmlFor="correo" className="text-sm text-foreground">
                   Correo electrónico
                   <input
+                    id="correo"
                     type="email"
                     name="correo"
                     autoComplete="email"
@@ -64,9 +67,10 @@ export function Contact() {
                     className={fieldClass}
                   />
                 </label>
-                <label className="text-sm text-foreground">
+                <label htmlFor="telefono" className="text-sm text-foreground">
                   Teléfono
                   <input
+                    id="telefono"
                     type="tel"
                     name="telefono"
                     autoComplete="tel"
@@ -82,7 +86,7 @@ export function Contact() {
           </Reveal>
         </div>
 
-        <div>
+        <div id="servicio-al-cliente" className="scroll-mt-24">
           <Reveal delay={80}>
             <p className="subheading text-sm tracking-[0.14em] text-primary">
               Soporte TMF
@@ -99,11 +103,6 @@ export function Contact() {
               adecuada, desde productos de línea hasta requerimientos y
               aplicaciones especializadas.
             </p>
-          </Reveal>
-          <Reveal delay={600} className="mt-10">
-            <Button href="/servicio-al-cliente" variant="inverse">
-              Habla con nuestro equipo
-            </Button>
           </Reveal>
         </div>
       </div>

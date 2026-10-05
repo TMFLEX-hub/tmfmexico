@@ -43,7 +43,7 @@ export function Downloads() {
           <div className="relative aspect-4/3 w-full bg-washed">
             <Image
               src="/images/electrico/generales-v2.jpg"
-              alt="Herramientas y soluciones para canalización eléctrica TMF"
+              alt="Herramientas, tubería flexible y accesorios TMF Eléctrico para canalización eléctrica"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 40vw, 100vw"

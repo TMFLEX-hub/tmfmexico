@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/Button";
+import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/Reveal";
 import { electricoCategories } from "@/data/electrico";
+import { buildPageMetadata, getSiteUrl } from "@/lib/seo";
 
 type Props = PageProps<"/electrico/[categoria]">;
 
@@ -18,13 +20,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = electricoCategories.find((item) => item.slug === categoria);
 
   if (!category) {
-    return { title: "TMF Eléctrico | TMF Mexico" };
+    return { title: "TMF Eléctrico", robots: { index: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${category.title} | TMF Eléctrico`,
-    description: `Productos TMF Eléctrico: ${category.title}.`,
-  };
+    description: category.seoDescription,
+    path: `/electrico/${category.slug}`,
+    image: category.image,
+    imageAlt: category.imageAlt,
+    absoluteTitle: true,
+  });
 }
 
 export default async function ElectricoCategoryPage({ params }: Props) {
@@ -35,8 +41,40 @@ export default async function ElectricoCategoryPage({ params }: Props) {
     notFound();
   }
 
+  const siteUrl = getSiteUrl();
+  const url = `${siteUrl}/electrico/${category.slug}`;
+
   return (
     <main className="flex flex-1 flex-col bg-white">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: category.title,
+          description: category.seoDescription,
+          url,
+          image: `${siteUrl}${category.image}`,
+          isPartOf: {
+            "@type": "CollectionPage",
+            name: "TMF Eléctrico",
+            url: `${siteUrl}/electrico`,
+          },
+          about: {
+            "@type": "Product",
+            name: `${category.title} TMF Eléctrico`,
+            description: category.seoDescription,
+            image: `${siteUrl}${category.image}`,
+            brand: {
+              "@type": "Brand",
+              name: "TMF",
+            },
+            manufacturer: {
+              "@type": "Organization",
+              name: "Tubos Mexicanos Flexibles",
+            },
+          },
+        }}
+      />
       <section className="px-5 py-16 sm:px-8 lg:px-16 lg:py-24 xl:px-20">
         <div className="mx-auto grid max-w-[90rem] items-center gap-12 lg:grid-cols-2">
           <div>
@@ -65,9 +103,6 @@ export default async function ElectricoCategoryPage({ params }: Props) {
                 rel="noopener noreferrer"
               >
                 Descargar catálogo
-              </Button>
-              <Button href="/electrico#contacto" variant="inverse">
-                Contáctanos
               </Button>
             </Reveal>
           </div>

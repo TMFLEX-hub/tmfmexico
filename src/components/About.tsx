@@ -84,7 +84,7 @@ export function About() {
         >
           <Image
             src="/images/aboutr.jpg"
-            alt="Instalación eléctrica con tubería flexible TMF"
+            alt="Tubería flexible TMF en una instalación, manufactura mexicana desde 1957"
             fill
             className="object-cover object-top-left"
             sizes="90vw"
@@ -125,6 +125,7 @@ export function About() {
                 >
                   <Icon
                     icon={value.icon}
+                    aria-hidden
                     className="size-8 text-white [&_path]:fill-white"
                   />
                   <span className="heading text-[clamp(0.95rem,1.15vw,1.125rem)] text-white">

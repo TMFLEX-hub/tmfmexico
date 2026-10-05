@@ -2,13 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
-
-const socials = [
-  { href: "#", icon: "mdi:facebook", label: "Facebook" },
-  { href: "#", icon: "mdi:linkedin", label: "LinkedIn" },
-  { href: "#", icon: "mdi:youtube", label: "YouTube" },
-  { href: "#", icon: "mdi:instagram", label: "Instagram" },
-];
+import { siteConfig } from "@/lib/seo";
 
 async function FooterLogo() {
   const svg = await readFile(
@@ -31,7 +25,7 @@ export async function Footer() {
       <div className="mx-auto grid max-w-[90rem] items-center gap-8 lg:grid-cols-3 lg:gap-10">
         <Link
           href="/"
-          aria-label="TMF Tubos Mexicanos Flexible"
+          aria-label="TMF Tubos Mexicanos Flexibles"
           className="justify-self-center lg:justify-self-start"
         >
           <FooterLogo />
@@ -40,14 +34,16 @@ export async function Footer() {
         <div className="flex flex-col items-center gap-4">
           <p className="text-sm">Síguenos en redes sociales</p>
           <ul className="flex items-center gap-5">
-            {socials.map((social) => (
+            {siteConfig.socials.map((social) => (
               <li key={social.label}>
                 <a
                   href={social.href}
                   aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white transition-opacity hover:opacity-80"
                 >
-                  <Icon icon={social.icon} className="size-5" />
+                  <Icon icon={social.icon} className="size-5" aria-hidden />
                 </a>
               </li>
             ))}

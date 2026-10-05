@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 
@@ -18,14 +17,10 @@ export function Coverage({
   eyebrow = "Cobertura y cercanía",
   title = "Cerca de nuestros clientes. Cerca de sus proyectos.",
   description = "Nuestra presencia en México nos permite brindar atención, disponibilidad de producto y soporte para las necesidades de cada proyecto.",
-  ctaLabel = "Encuentra tu sucursal",
-  ctaHref = "/sucursales",
 }: {
   eyebrow?: string;
   title?: string;
   description?: string;
-  ctaLabel?: string;
-  ctaHref?: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(false);
@@ -82,16 +77,16 @@ export function Coverage({
               {description}
             </p>
           </Reveal>
-          <Reveal delay={540} className="mt-10">
-            <Button href={ctaHref}>{ctaLabel}</Button>
-          </Reveal>
         </div>
 
         <Reveal delay={280} variant="scale" className="w-full">
-          <div className="relative mx-auto aspect-795/591 w-full max-w-3xl lg:max-w-none">
+          <div
+            id="mapa"
+            className="relative mx-auto aspect-795/591 w-full max-w-3xl scroll-mt-24 lg:max-w-none"
+          >
             <Image
               src="/images/mapa.svg"
-              alt="Mapa de cobertura TMF en México"
+              alt="Mapa de cobertura TMF en México con presencia en Nuevo León, Jalisco, Querétaro, Estado de México y Yucatán"
               fill
               className="object-contain"
             />

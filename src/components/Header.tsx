@@ -21,7 +21,7 @@ export function Header({
   ctaLabel = "Conoce nuestras soluciones",
   ctaHref = "#soluciones",
   imageSrc = "/images/header.png",
-  imageAlt = "Tubería flexible TMF con conexiones industriales",
+  imageAlt = "Tubería flexible TMF fabricada en México para instalaciones eléctricas e industriales",
   imageFit = "cover",
   priority = false,
 }: HeaderProps) {

@@ -70,6 +70,7 @@ export function ProductCategories() {
               <Reveal delay={220 + index * 120}>
                 <Icon
                   icon="mdi:arrow-right"
+                  aria-hidden
                   className="mb-0.5 size-5 shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-1"
                 />
               </Reveal>
