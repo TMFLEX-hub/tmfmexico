@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Button } from "@/components/Button";
+import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 
 const fieldClass =
@@ -42,6 +43,28 @@ export function Contact() {
       setStatus("error");
     }
   };
+
+  const closeModal = () => setStatus("idle");
+
+  useEffect(() => {
+    if (status !== "sent") {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setStatus("idle");
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [status]);
 
   return (
     <section
@@ -120,11 +143,6 @@ export function Contact() {
                 </Button>
               </div>
 
-              {status === "sent" ? (
-                <p className="text-sm text-primary" role="status">
-                  Mensaje enviado. Pronto nos pondremos en contacto.
-                </p>
-              ) : null}
               {status === "error" ? (
                 <p className="text-sm text-foreground/70" role="alert">
                   No se pudo enviar. Intenta de nuevo.
@@ -154,6 +172,39 @@ export function Contact() {
           </Reveal>
         </div>
       </div>
+
+      {status === "sent" ? (
+        <div
+          className="fixed inset-0 z-80 flex items-center justify-center bg-black/40 px-5"
+          onClick={closeModal}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contacto-exito-titulo"
+            className="w-full max-w-md bg-white px-8 py-12 text-center shadow-[0_24px_50px_-28px_rgba(0,157,228,0.55)]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-washed text-primary">
+              <Icon icon="mdi:check" className="size-8" aria-hidden />
+            </span>
+            <h3
+              id="contacto-exito-titulo"
+              className="heading mt-6 text-2xl tracking-tight text-foreground"
+            >
+              Mensaje enviado
+            </h3>
+            <p className="mx-auto mt-3 max-w-xs text-base leading-7 text-foreground/70">
+              Pronto nos pondremos en contacto.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Button type="button" onClick={closeModal}>
+                Cerrar
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }
