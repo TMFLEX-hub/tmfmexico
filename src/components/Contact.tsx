@@ -1,15 +1,46 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Button } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 
 const fieldClass =
   "mt-2 h-12 w-full rounded-none border border-foreground/15 bg-white px-5 text-foreground outline-none transition-colors focus:border-primary";
 
+type FormStatus = "idle" | "sending" | "sent" | "error";
+
 export function Contact() {
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<FormStatus>("idle");
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setStatus("sending");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: data.get("nombre"),
+          empresa: data.get("empresa"),
+          correo: data.get("correo"),
+          telefono: data.get("telefono"),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("send failed");
+      }
+
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -80,8 +111,25 @@ export function Contact() {
               </div>
 
               <div className="mt-3">
-                <Button type="submit">Contáctanos</Button>
+                <Button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="disabled:pointer-events-none disabled:opacity-60"
+                >
+                  {status === "sending" ? "Enviando..." : "Contáctanos"}
+                </Button>
               </div>
+
+              {status === "sent" ? (
+                <p className="text-sm text-primary" role="status">
+                  Mensaje enviado. Pronto nos pondremos en contacto.
+                </p>
+              ) : null}
+              {status === "error" ? (
+                <p className="text-sm text-foreground/70" role="alert">
+                  No se pudo enviar. Intenta de nuevo.
+                </p>
+              ) : null}
             </form>
           </Reveal>
         </div>
